@@ -2,15 +2,22 @@ const { Contact } = require("../../models");
 
 const getById = async (req, res) => {
   const { contactId } = req.params;
-  const contact = await Contact.findById(contactId);
+  const { _id } = req.user;
+
+  const contact = await Contact.findOne({
+    owner: _id,
+    _id: contactId,
+  }).populate("owner", "_id email subscription");
+
   if (!contact) {
     res.status(404).json({
       status: "ERROR",
       code: 404,
-      massage: `Contact with ID=${contactId} not found`,
+      message: `Contact with ID=${contactId} not found`,
     });
     return;
   }
+
   res.json({
     status: "Success",
     code: 200,
