@@ -31,6 +31,8 @@ To run this project, you will need to add the following environment variables to
 | `password`      | `string` | **Required**. Password                                        |
 | `subscription`  | `string` | **Default: "starter"**. Options: "starter", "pro", "business" |
 
+---
+
 #### Login registered user
 
 ```http
@@ -42,17 +44,23 @@ To run this project, you will need to add the following environment variables to
 | `email`         | `string` | **Required**. Email    |
 | `password`      | `string` | **Required**. Password |
 
+---
+
 #### Logout user from service
 
 ```http
   GET /api/auth/login
 ```
 
+---
+
 #### Get current logged in user
 
 ```http
   GET /api/users/current
 ```
+
+---
 
 #### Change user subscription
 
@@ -64,6 +72,8 @@ To run this project, you will need to add the following environment variables to
 | :-------------- | :------- | :------------------------------------------------- |
 | `subscription`  | `string` | **Required options**: "starter", "pro", "business" |
 
+---
+
 #### Change user avatar
 
 ```http
@@ -74,11 +84,15 @@ To run this project, you will need to add the following environment variables to
 | :------------------ | :------------------ |
 | multipart/form-data | **Required**. Image |
 
+---
+
 #### Get all contacts for currently logged in user
 
 ```http
   GET /api/contacts/ (allows query options: ?page=[number]&limit=[number]&favorite=[boole])
 ```
+
+---
 
 #### Get contact by ID
 
@@ -89,6 +103,8 @@ To run this project, you will need to add the following environment variables to
 | Query string params | Type     | Description              |
 | :------------------ | :------- | :----------------------- |
 | `contactId`         | `string` | **Required**. Contact ID |
+
+---
 
 #### Post new contact
 
@@ -102,6 +118,8 @@ To run this project, you will need to add the following environment variables to
 | `email`         | `string`  | Email                             |
 | `phone`         | `string`  | Phone                             |
 | `favorite`      | `boolean` | **Default: false**. Mark favorite |
+
+---
 
 #### Edit contact by ID
 
@@ -120,6 +138,8 @@ To run this project, you will need to add the following environment variables to
 | `phone`         | `string`  | Phone              |
 | `favorite`      | `boolean` | Mark favorite      |
 
+---
+
 #### Mark contact as a favorite
 
 ```http
@@ -133,6 +153,8 @@ To run this project, you will need to add the following environment variables to
 | Body parameters | Type      | Description                             |
 | :-------------- | :-------- | :-------------------------------------- |
 | `favorite`      | `boolean` | **Required**. Mark as "true" or "false" |
+
+---
 
 #### Delete contact by ID
 
