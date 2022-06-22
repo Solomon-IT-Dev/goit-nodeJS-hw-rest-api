@@ -13,7 +13,7 @@ const updateById = async (req, res) => {
     {
       new: true,
     }
-  ).populate("owner", "_id email subscription");
+  ).populate("owner", "_id email subscription avatarURL");
 
   if (!updatedContact) {
     res.status(404).json({

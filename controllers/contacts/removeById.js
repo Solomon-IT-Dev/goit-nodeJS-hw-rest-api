@@ -7,7 +7,7 @@ const removeById = async (req, res) => {
   const removedContact = await Contact.findOneAndRemove({
     owner: _id,
     _id: contactId,
-  }).populate("owner", "_id email subscription");
+  }).populate("owner", "_id email subscription avatarURL");
 
   if (!removedContact) {
     res.status(404).json({
