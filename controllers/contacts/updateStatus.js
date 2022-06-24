@@ -12,7 +12,7 @@ const updateStatus = async (req, res) => {
     },
     { favorite },
     { new: true }
-  ).populate("owner", "_id email subscription avatarURL");
+  ).populate("owner", "_id email subscription avatarURL verify");
 
   if (!updatedContactStatus) {
     res.status(404).json({

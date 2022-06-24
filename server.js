@@ -5,7 +5,7 @@ const { DB_HOST, PORT = 3000 } = require("./helpers/evn");
 mongoose
   .connect(DB_HOST)
   .then(() => {
-    console.log("Database connection successful");
+    console.log(`Database connection successful at host ${DB_HOST}`);
     app.listen(PORT);
   })
   .then(() => console.log(`Server running. Use our API on port: ${PORT}`))

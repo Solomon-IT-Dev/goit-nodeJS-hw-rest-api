@@ -12,7 +12,7 @@ const getAll = async (req, res) => {
       skip,
       limit: Number(limit),
     }
-  ).populate("owner", "_id email subscription avatarURL");
+  ).populate("owner", "_id email subscription avatarURL verify");
 
   res.json({
     status: "Success",
