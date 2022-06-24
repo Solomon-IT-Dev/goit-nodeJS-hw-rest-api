@@ -12,6 +12,8 @@ To run this project, you will need to add the following environment variables to
 
 `SECRET_KEY`
 
+`SENDGRID_API_KEY`
+
 ## Run commands
 
 - `npm run start` - to run in prod mode
