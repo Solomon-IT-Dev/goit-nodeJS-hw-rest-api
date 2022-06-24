@@ -1,9 +1,17 @@
 const { User } = require("../../models");
 const bcrypt = require("bcryptjs");
 const gravatar = require("gravatar");
+const { v4: uuidv4 } = require("uuid");
+const sendEmail = require("../../helpers/sendEmail");
+const { PORT = 3000 } = require("../../helpers/evn");
 
 const signup = async (req, res) => {
-  const { password, email, subscription = "starter" } = req.body;
+  const {
+    password,
+    email,
+    subscription = "starter",
+    verify = false,
+  } = req.body;
 
   const user = await User.findOne({ email });
 
@@ -17,8 +25,28 @@ const signup = async (req, res) => {
   }
 
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+
   const avatarURL = gravatar.url(email, { protocol: "http", s: "250" });
-  await User.create({ password: hashPassword, email, subscription, avatarURL });
+
+  const verificationToken = uuidv4();
+
+  await User.create({
+    password: hashPassword,
+    email,
+    subscription,
+    avatarURL,
+    verificationToken,
+  });
+
+  const link = `http://localhost:${PORT}/api/auth/verify/${verificationToken}`;
+
+  const verificationEmail = {
+    to: email,
+    subject: "Email verification from Contacts service",
+    html: `<p>Click on the link to verify your email address: <a target="_blank" href=${link}>VERIFICATION LINK</a></p>`,
+  };
+
+  await sendEmail(verificationEmail);
 
   res.status(201).json({
     status: "Created",
@@ -29,6 +57,8 @@ const signup = async (req, res) => {
         email,
         subscription,
         avatarURL,
+        verify,
+        verificationToken,
       },
     },
   });

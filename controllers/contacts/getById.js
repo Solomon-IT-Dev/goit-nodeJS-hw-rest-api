@@ -7,7 +7,7 @@ const getById = async (req, res) => {
   const contact = await Contact.findOne({
     owner: _id,
     _id: contactId,
-  }).populate("owner", "_id email subscription avatarURL");
+  }).populate("owner", "_id email subscription avatarURL verify");
 
   if (!contact) {
     res.status(404).json({

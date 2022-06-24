@@ -9,17 +9,17 @@ const login = async (req, res) => {
 
   const passCompare = bcrypt.compareSync(password, user.password);
 
-  if (!user || !passCompare) {
+  if (!user || !user.verify || !passCompare) {
     res.status(401).json({
       status: "Unauthorized",
       code: 401,
-      message: "Email or password is wrong",
+      message: "Email is wrong or not verify, or password is wrong",
     });
     return;
   }
 
   const payload = { id: user._id };
-  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "12h" });
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "24h" });
 
   await User.findByIdAndUpdate(user._id, { token });
 
@@ -33,6 +33,7 @@ const login = async (req, res) => {
         email: user.email,
         subscription: user.subscription,
         avatarURL: user.avatarURL,
+        verify: user.verify,
       },
     },
   });

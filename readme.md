@@ -54,6 +54,30 @@ To run this project, you will need to add the following environment variables to
 
 ---
 
+#### Verify email address
+
+```http
+  GET /api/auth/verify/:verificationToken
+```
+
+| Query string params | Type     | Description                      |
+| :------------------ | :------- | :------------------------------- |
+| `verificationToken` | `string` | **Required**. Verification token |
+
+---
+
+#### Resend verification email
+
+```http
+  POST /api/auth/verify
+```
+
+| Body parameters | Type     | Description         |
+| :-------------- | :------- | :------------------ |
+| `email`         | `string` | **Required**. Email |
+
+---
+
 #### Get current logged in user
 
 ```http
